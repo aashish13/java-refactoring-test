@@ -1,26 +1,31 @@
-package com.h2rd.refactoring.web;
+package com.h2rd.refactoring.controllers;
 
-import com.h2rd.refactoring.usermanagement.User;
-import com.h2rd.refactoring.usermanagement.UserDao;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/users")
-public class UserResource {
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.Response;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.h2rd.refactoring.data.dao.UserDao;
+import com.h2rd.refactoring.data.model.User;
+
+@Path("/users")
+@Component
+public class UserRestController{
+	@Autowired
 	public UserDao userDao;
 
 	@GET
-	@Path("find/")
 	public Response getUsers() {
-
-		if (userDao == null) {
-			userDao = UserDao.getUserDao();
-		}
-		GenericEntity<List<User>> usersEntity = new GenericEntity<List<User>>(userDao.getUsers()){};
+		System.out.println("Inside"+userDao);
+		GenericEntity<List<User>> usersEntity = new GenericEntity<List<User>>(userDao.getUsers()) {
+		};
 		return Response.status(200).entity(usersEntity).build();
 	}
 
@@ -28,16 +33,10 @@ public class UserResource {
 	@Path("add/")
 	public Response addUser(@QueryParam("name") String name, @QueryParam("email") String email,
 			@QueryParam("role") List<String> roles) {
-
 		User user = new User();
 		user.setName(name);
 		user.setEmail(email);
 		user.setRoles(roles);
-
-		if (userDao == null) {
-			userDao = UserDao.getUserDao();
-		}
-
 		userDao.saveUser(user);
 		return Response.ok().entity(user).build();
 	}
@@ -46,16 +45,10 @@ public class UserResource {
 	@Path("update/")
 	public Response updateUser(@QueryParam("name") String name, @QueryParam("email") String email,
 			@QueryParam("role") List<String> roles) {
-
 		User user = new User();
 		user.setName(name);
 		user.setEmail(email);
 		user.setRoles(roles);
-
-		if (userDao == null) {
-			userDao = UserDao.getUserDao();
-		}
-
 		userDao.updateUser(user);
 		return Response.ok().entity(user).build();
 	}
@@ -68,23 +61,13 @@ public class UserResource {
 		user.setName(name);
 		user.setEmail(email);
 		user.setRoles(roles);
-
-		if (userDao == null) {
-			userDao = UserDao.getUserDao();
-		}
-
 		userDao.deleteUser(user);
 		return Response.ok().entity(user).build();
 	}
 
 	@GET
-	@Path("search/")
-	public Response findUser(@QueryParam("name") String name) {
-
-		if (userDao == null) {
-			userDao = UserDao.getUserDao();
-		}
-
+	@Path("{name}")
+	public Response findUser(@PathParam("name") String name) {
 		User user = userDao.findUser(name);
 		return Response.ok().entity(user).build();
 	}
