@@ -1,34 +1,36 @@
 package test.com.h2rd.refactoring;
 
-import com.h2rd.refactoring.usermanagement.User;
-import com.h2rd.refactoring.usermanagement.UserDao;
+import java.util.Arrays;
+
+import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
+import com.h2rd.refactoring.usermanagement.User;
+import com.h2rd.refactoring.usermanagement.UserDao;
 
 public class UserDaoTest {
 
-    UserDao userDao=UserDao.getUserDao();
-    User user = new User();;
+	UserDao userDao = UserDao.getUserDao();
+	User user;
 
-    @Test
-    public void saveUserTest() {
-        user.setName("Fake Name");
-        user.setEmail("fake@email.com");
-        user.setRoles(Arrays.asList("admin", "master"));
-        userDao.saveUser(user);
-    }
+	@Before
+	public void setup() {
+		user = new User();
+		user.setName("Fake Name");
+		user.setEmail("fake@email.com");
+		user.setRoles(Arrays.asList("admin", "master"));
+	}
 
-    @Test
-    public void deleteUserTest() {
-        User user = new User();
-        user.setName("Fake Name");
-        user.setEmail("fake@email.com");
-        user.setRoles(Arrays.asList("admin", "master"));
+	@Test
+	public void saveUserTest() {
+		userDao.saveUser(user);
+	}
 
-        try {
-            userDao.deleteUser(user);
-        } catch (NullPointerException e) {
-        }
-    }
+	@Test
+	public void deleteUserTest() {
+		try {
+			userDao.deleteUser(user);
+		} catch (NullPointerException e) {
+		}
+	}
 }
