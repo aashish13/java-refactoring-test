@@ -1,7 +1,8 @@
 package com.h2rd.refactoring.data.model;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class User {

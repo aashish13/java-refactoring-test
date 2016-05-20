@@ -14,17 +14,18 @@ import org.springframework.stereotype.Component;
 
 import com.h2rd.refactoring.data.dao.UserDao;
 import com.h2rd.refactoring.data.model.User;
+import com.h2rd.refactoring.service.UserService;
 
 @Path("/users")
 @Component
 public class UserRestController{
 	@Autowired
-	public UserDao userDao;
+	public UserService userService;
 
 	@GET
 	public Response getUsers() {
-		System.out.println("Inside"+userDao);
-		GenericEntity<List<User>> usersEntity = new GenericEntity<List<User>>(userDao.getUsers()) {
+		System.out.println("Inside => "+userService);
+		GenericEntity<List<User>> usersEntity = new GenericEntity<List<User>>(userService.getAll()) {
 		};
 		return Response.status(200).entity(usersEntity).build();
 	}
@@ -37,7 +38,7 @@ public class UserRestController{
 		user.setName(name);
 		user.setEmail(email);
 		user.setRoles(roles);
-		userDao.saveUser(user);
+		userService.save(user);
 		return Response.ok().entity(user).build();
 	}
 
@@ -49,7 +50,7 @@ public class UserRestController{
 		user.setName(name);
 		user.setEmail(email);
 		user.setRoles(roles);
-		userDao.updateUser(user);
+		userService.update(user);
 		return Response.ok().entity(user).build();
 	}
 
@@ -61,14 +62,14 @@ public class UserRestController{
 		user.setName(name);
 		user.setEmail(email);
 		user.setRoles(roles);
-		userDao.deleteUser(user);
+		userService.delete(user);
 		return Response.ok().entity(user).build();
 	}
 
 	@GET
 	@Path("{name}")
 	public Response findUser(@PathParam("name") String name) {
-		User user = userDao.findUser(name);
+		User user = userService.find(name);
 		return Response.ok().entity(user).build();
 	}
 }
