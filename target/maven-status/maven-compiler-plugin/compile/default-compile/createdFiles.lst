@@ -1,0 +1,7 @@
+com\h2rd\refactoring\data\UserList.class
+com\h2rd\refactoring\service\UserService.class
+com\h2rd\refactoring\controllers\UserRestController.class
+com\h2rd\refactoring\data\repository\UserRepositoryStub.class
+com\h2rd\refactoring\data\model\User.class
+com\h2rd\refactoring\data\repository\UserRepository.class
+com\h2rd\refactoring\data\model\Role.class

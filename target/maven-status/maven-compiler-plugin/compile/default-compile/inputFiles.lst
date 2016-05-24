@@ -1,5 +1,8 @@
 D:\dev\sap-workspace\refactoring\src\main\java\com\h2rd\refactoring\controllers\UserRestController.java
-D:\dev\sap-workspace\refactoring\src\main\java\com\h2rd\refactoring\config\Config.java
+D:\dev\sap-workspace\refactoring\src\main\java\com\h2rd\refactoring\data\UserList.java
 D:\dev\sap-workspace\refactoring\src\main\java\com\h2rd\refactoring\data\model\User.java
-D:\dev\sap-workspace\refactoring\src\main\java\com\h2rd\refactoring\data\dao\UserDao.java
+D:\dev\sap-workspace\refactoring\src\main\java\com\h2rd\refactoring\data\repository\UserRepositoryStub.java
+D:\dev\sap-workspace\refactoring\src\main\java\com\h2rd\refactoring\service\UserServiceImpl.java
+D:\dev\sap-workspace\refactoring\src\main\java\com\h2rd\refactoring\data\repository\UserRepository.java
 D:\dev\sap-workspace\refactoring\src\main\java\com\h2rd\refactoring\service\UserService.java
+D:\dev\sap-workspace\refactoring\src\main\java\com\h2rd\refactoring\data\model\Role.java
